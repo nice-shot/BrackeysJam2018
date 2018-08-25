@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloorTileController : MonoBehaviour {
+public class FloorTile : MonoBehaviour {
 
     public GameObject overlayUI;
 
+    private GameObject placeable;
     private bool available = true;
     private float doubleClickTimer;
     private bool clicked = false;
@@ -35,7 +36,9 @@ public class FloorTileController : MonoBehaviour {
             Debug.Log("Clicked when available");
             available = false;
             overlayUI.SetActive(false);
-            //TODO: Place element above tile
+            
+            // Place element above tile
+            PlaceElement(GameManager.instance.GetPlaceable());
 
             return;
         }
@@ -49,7 +52,23 @@ public class FloorTileController : MonoBehaviour {
             available = true;
             clicked = false;
             overlayUI.SetActive(true);
-            // TODO: Clear element above tile
+            // Remove element above tile
+            RemoveElement();
         }
+    }
+
+    private void PlaceElement(GameObject placeablePrefab) {
+        if (placeablePrefab == null) {
+            // TODO: Indicate there was no element to place
+            return;
+        }
+        placeable = Instantiate(placeablePrefab, transform);
+    }
+
+    private void RemoveElement() {
+        if (placeable != null) {
+            Destroy(placeable);
+        }
+        placeable = null;
     }
 }
