@@ -15,7 +15,6 @@ public class FloorTile : MonoBehaviour {
     private void Update() {
         if (clicked) {
             if (Time.time - doubleClickTimer > DOUBLE_CLICK_DELAY) {
-                Debug.Log("Clearing click");
                 clicked = false;
             }
         }
@@ -33,22 +32,15 @@ public class FloorTile : MonoBehaviour {
 
     private void OnMouseDown() {
         if (available) {
-            Debug.Log("Clicked when available");
-            available = false;
-            overlayUI.SetActive(false);
-            
             // Place element above tile
             PlaceElement(GameManager.instance.GetPlaceable());
-
             return;
         }
 
         if (!clicked) {
-            Debug.Log("First click");
             clicked = true;
             doubleClickTimer = Time.time;
         } else {
-            Debug.Log("Second click");
             available = true;
             clicked = false;
             overlayUI.SetActive(true);
@@ -63,6 +55,8 @@ public class FloorTile : MonoBehaviour {
             return;
         }
         placeable = Instantiate(placeablePrefab, transform);
+        available = false;
+        overlayUI.SetActive(false);
     }
 
     private void RemoveElement() {
