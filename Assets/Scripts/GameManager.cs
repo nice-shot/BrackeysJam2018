@@ -9,16 +9,17 @@ public class GameManager : MonoBehaviour {
 
     public Level[] levels;
     public int currentLevel;
-    public GameObject tilePrefab;
+    public FloorTile tilePrefab;
     public Transform tilesParent;
     public UIManager uiManager;
     public Animator animator;
+    private bool levelPassed;
 
-    private FloorTile[,] floorGrid;
+    private FloorTile[,] tileGrid;
 
     [SerializeField] private Placeable currentPlaceable;
 
-    private List<GameObject> tiles = new List<GameObject>();
+    private List<FloorTile> tiles = new List<FloorTile>();
 
 
     private void Awake() {
@@ -58,16 +59,18 @@ public class GameManager : MonoBehaviour {
         currentPlaceable = null;
 
         // Clear tiles
-        foreach(GameObject tile in tiles) {
+        foreach(FloorTile tile in tiles) {
             if (!Application.isPlaying) {
                 // Used when changing levels in the editor
-                DestroyImmediate(tile);
+                DestroyImmediate(tile.gameObject);
             } else {
-                Destroy(tile);
+                Destroy(tile.gameObject);
             }
 
         }
-        tiles = new List<GameObject>();
+        tiles = new List<FloorTile>();
+        // Default large size - probably won't reach this
+        tileGrid = new FloorTile[20, 20];
 
         // Clear UI
         uiManager.ClearButtons();
@@ -77,15 +80,19 @@ public class GameManager : MonoBehaviour {
         ClearLevel();
 
         currentPlaceable = null;
+        levelPassed = false;
 
         Level level = levels[currentLevel];
 
         // Place tiles
         foreach (Level.TilePlacement tilePlacement in level.tiles) {
-            // Tiles are always on 0.5 to fit the grid
+            // Tiles are always on 0.5 on y to pop out of ground
             Vector3 position = new Vector3(tilePlacement.x, 0.5f, tilePlacement.z);
-            GameObject tile = Instantiate(tilePrefab, position, Quaternion.identity, tilesParent);
+            FloorTile tile = Instantiate(tilePrefab, position, Quaternion.identity, tilesParent);
             tiles.Add(tile);
+            tile.xIndex = (int)tilePlacement.x;
+            tile.zIndex = (int)tilePlacement.z;
+            tileGrid[tile.xIndex, tile.zIndex] = tile;
         }
 
         // Set Camera
@@ -99,7 +106,7 @@ public class GameManager : MonoBehaviour {
     public void SaveLevel() {
         
         // Reset the tile list
-        tiles = new List<GameObject>();
+        tiles = new List<FloorTile>();
 
         // Find tiles
         FloorTile[] currentTiles;
@@ -118,7 +125,7 @@ public class GameManager : MonoBehaviour {
             tilePlacement.x = tile.transform.position.x;
             tilePlacement.z = tile.transform.position.z;
             level.tiles[i] = tilePlacement;
-            tiles.Add(tile.gameObject);
+            tiles.Add(tile);
         }
 
         // Set camera
@@ -132,10 +139,57 @@ public class GameManager : MonoBehaviour {
     public void RunLevel() {
         animator.SetBool("ChangeLight", true);
 
-        // We'll show the level's output when it's over. Though we'll check the level outcome here
+        // Calculate lights (more accurately shadows)
+        foreach (FloorTile tile in tiles) {
+            if (tile.placeable is Wall) {
+                // Inform light data:
+
+                // Full light to tile above
+                AddShadow(tile.xIndex, tile.zIndex + 1, 1f);
+
+                // Quarter light to sides
+                AddShadow(tile.xIndex + 1, tile.zIndex, 0.25f);
+                AddShadow(tile.xIndex - 1, tile.zIndex, 0.25f);
+
+                // Half light to diagonals
+                AddShadow(tile.xIndex + 1, tile.zIndex + 1, 0.5f);
+                AddShadow(tile.xIndex - 1, tile.zIndex + 1, 0.5f);
+            }
+        }
+
+        // Check if level passed
+        foreach (FloorTile tile in tiles) {
+            if (tile.placeable is Plant) {
+                Plant plant = tile.placeable as Plant;
+                if (plant.sunNeeds != tile.GetReceivedLight()) {
+                    Debug.Log("Plant on tile: " + tile.xIndex + "/" + tile.zIndex + " didn't get correct light");
+                    return;
+                }
+            }
+        }
+
+        levelPassed = true;
+    }
+
+    private void AddShadow(int x, int z, float amount) {
+        // Check that we're in grid bounds
+        if (x < 0 || x >= tileGrid.Length
+            || z < 0 || z >= tileGrid.Length) {
+            return;
+        }
+
+        FloorTile tile = tileGrid[x, z];
+        if (tile != null) {
+            tile.ReceiveShadow(amount);
+        }
     }
 
     public void OnLightAnimationEnd() {
+        if (levelPassed) {
+            Debug.Log("you win");
+        } else {
+            Debug.Log("you lose");
+        }
         // TODO: Check if the level passed on print message
         uiManager.ShowEndPanel(true);
     }

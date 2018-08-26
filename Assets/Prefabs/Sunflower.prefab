@@ -96,4 +96,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: sunflower
-  sunReq: 0
+  sunNeeds: 1

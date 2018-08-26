@@ -5,11 +5,14 @@ using UnityEngine;
 public class FloorTile : MonoBehaviour {
 
     public GameObject overlayUI;
+    public int xIndex;
+    public int zIndex;
 
-    private Placeable placeable;
+    public Placeable placeable;
     private bool available = true;
     private float doubleClickTimer;
     private bool clicked = false;
+    private float lightReceived = 1f;
     const float DOUBLE_CLICK_DELAY = 0.25f;
 
     private GameManager manager;
@@ -71,5 +74,14 @@ public class FloorTile : MonoBehaviour {
             Destroy(placeable.gameObject);
         }
         placeable = null;
+    }
+
+    public void ReceiveShadow(float amount) {
+        lightReceived -= amount;
+        lightReceived = Mathf.Max(lightReceived, 0f);
+    }
+
+    public float GetReceivedLight() {
+        return lightReceived;
     }
 }

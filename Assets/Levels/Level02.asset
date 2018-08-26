@@ -15,9 +15,9 @@ MonoBehaviour:
   - x: 0
     z: 0
   - x: 0
-    z: -1
+    z: 1
   - x: 0
-    z: -2
+    z: 2
   placeables:
   - placeable: {fileID: 114821785921637666, guid: 26b26c354f1e0d94b96461a06327163e,
       type: 2}
@@ -28,4 +28,4 @@ MonoBehaviour:
   - placeable: {fileID: 114219849510895370, guid: 7b9cb243757b784438b4bee0dde8611f,
       type: 2}
     amount: 1
-  cameraPosition: {x: 0, y: 8, z: -2}
+  cameraPosition: {x: 0, y: 8, z: 0}

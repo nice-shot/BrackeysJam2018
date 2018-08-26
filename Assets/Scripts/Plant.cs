@@ -6,13 +6,5 @@ using System.Collections;
 /// A planet that can be placed on the garden
 /// </summary>
 public class Plant : Placeable {
-    public enum SunNeeds {
-        Full,
-        ThreeQuarters,
-        Half,
-        Quarter,
-        Zero
-    }
-
-    public SunNeeds sunReq;
+    public float sunNeeds;
 }

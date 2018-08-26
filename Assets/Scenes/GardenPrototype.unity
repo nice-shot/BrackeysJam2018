@@ -605,7 +605,7 @@ Prefab:
     - target: {fileID: 114924512727792378, guid: 6aeff03b16bd0db46a20426faef071bd,
         type: 2}
       propertyPath: currentLevel
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114924512727792378, guid: 6aeff03b16bd0db46a20426faef071bd,
         type: 2}
@@ -617,6 +617,12 @@ Prefab:
       propertyPath: endMessagePanel
       value: 
       objectReference: {fileID: 2024996033}
+    - target: {fileID: 114924512727792378, guid: 6aeff03b16bd0db46a20426faef071bd,
+        type: 2}
+      propertyPath: tilePrefab
+      value: 
+      objectReference: {fileID: 114816173658074536, guid: 37b8435d8827d5345bf63b6cd2e73b8f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aeff03b16bd0db46a20426faef071bd, type: 2}
   m_IsPrefabAsset: 0
