@@ -8,11 +8,13 @@ public class PlaceableButton : MonoBehaviour {
     public int amount;
     public Text amountText;
     public Text nameText;
+    public Button button;
 
     private GameManager manager;
 
     private void Awake() {
         manager = GameManager.instance;
+        button = GetComponent<Button>();
     }
 
     public void Setup() {
@@ -36,6 +38,11 @@ public class PlaceableButton : MonoBehaviour {
     private void SetAmount(int newAmount) {
         amount = newAmount;
         amountText.text = amount.ToString();
+        if (amount <= 0) {
+            button.interactable = false;
+        } else {
+            button.interactable = true;
+        }
     }
 
 }

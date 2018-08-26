@@ -5,4 +5,5 @@ using System.Collections;
 /// An object that can be placed on the garden
 /// </summary>
 public abstract class Placeable : MonoBehaviour {
+    public string id;
 }

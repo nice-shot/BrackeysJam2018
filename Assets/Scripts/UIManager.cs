@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour {
     public Button goButtton;
     public GameObject endMessagePanel;
 
-    private Dictionary<System.Type, PlaceableButton> placeableButtons = new Dictionary<System.Type, PlaceableButton>();
+    private Dictionary<string, PlaceableButton> placeableButtons = new Dictionary<string, PlaceableButton>();
     private int totalCounter;
 
     public void ClearButtons() {
@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour {
             // Used instead of Awake/Start to make sure added objects are placed
             button.Setup();
 
-            placeableButtons[placeableData.placeable.GetType()] = button;
+            placeableButtons[placeableData.placeable.id] = button;
             totalCounter += placeableData.amount;
         }
         CheckCounter();
@@ -42,10 +42,10 @@ public class UIManager : MonoBehaviour {
 
     public void ChangePlaceableAmount(Placeable usedPlaceable, bool increase) {
         if (increase) {
-            placeableButtons[usedPlaceable.GetType()].AddAmount();
+            placeableButtons[usedPlaceable.id].AddAmount();
             totalCounter++;
         } else {
-            placeableButtons[usedPlaceable.GetType()].LowerAmount();
+            placeableButtons[usedPlaceable.id].LowerAmount();
             totalCounter--;
         }
         CheckCounter();

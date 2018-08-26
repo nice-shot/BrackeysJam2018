@@ -108,4 +108,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d7d9b9fecb2e8543b5b4b4bccbc2c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: smallwall
   height: 1

@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour {
     public void NextLevel() {
         uiManager.ClearEndPanel();
         animator.SetBool("ChangeLight", false);
+        ClearLevel();
         currentLevel = (currentLevel + 1) % levels.Length;
         LoadLevel();
     }
