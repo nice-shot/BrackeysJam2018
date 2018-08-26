@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
     public UIManager uiManager;
     public Animator animator;
 
+    private FloorTile[,] floorGrid;
+
     [SerializeField] private Placeable currentPlaceable;
 
     private List<GameObject> tiles = new List<GameObject>();
