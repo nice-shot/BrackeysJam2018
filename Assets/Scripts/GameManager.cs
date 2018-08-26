@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour {
 
@@ -56,12 +57,33 @@ public class GameManager : MonoBehaviour {
         foreach(Level.TilePlacement tilePlacement in level.tiles) {
             // Tiles are always on 0.5 to fit the grid
             Vector3 position = new Vector3(tilePlacement.x, 0.5f, tilePlacement.z);
-            GameObject tile = Instantiate(tilePrefab, position, Quaternion.identity, null);
+            GameObject tile = Instantiate(tilePrefab, position, Quaternion.identity, tilesParent);
             tiles.Add(tile);
         }
     }
 
+    [ContextMenu("Save Level")]
     public void SaveLevel() {
+        FloorTile[] currentTiles;
+        if (tilesParent != null) {
+            currentTiles = tilesParent.GetComponentsInChildren<FloorTile>();
+        } else {
+            currentTiles = GetComponents<FloorTile>();
+        }
 
+        tiles = new List<GameObject>();
+        Level level = levels[currentLevel];
+        level.tiles = new Level.TilePlacement[currentTiles.Length];
+        for (int i = 0; i < currentTiles.Length; i++) {
+            FloorTile tile = currentTiles[i];
+            Level.TilePlacement tilePlacement = new Level.TilePlacement();
+            tilePlacement.x = tile.transform.position.x;
+            tilePlacement.z = tile.transform.position.z;
+            level.tiles[i] = tilePlacement;
+            tiles.Add(tile.gameObject);
+        }
+        EditorUtility.SetDirty(level);
+        AssetDatabase.Refresh();
+        AssetDatabase.SaveAssets();
     }
 }

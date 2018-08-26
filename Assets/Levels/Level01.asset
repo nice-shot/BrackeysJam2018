@@ -12,9 +12,5 @@ MonoBehaviour:
   m_Name: Level01
   m_EditorClassIdentifier: 
   tiles:
-  - x: -1
+  - x: 0.5
     z: -0.5
-  - x: 0
-    z: -0.5
-  - x: -1
-    z: 0.5
