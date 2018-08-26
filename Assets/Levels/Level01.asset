@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Name: Level01
   m_EditorClassIdentifier: 
   tiles:
-  - x: -0.5
-    z: -0.5
-  - x: -0.5
-    z: 0.5
   - x: 0.5
     z: -0.5
-  placeables: []
-  cameraPosition: {x: 0, y: 8, z: -1}
+  placeables:
+  - placeable: {fileID: 114821785921637666, guid: 26b26c354f1e0d94b96461a06327163e,
+      type: 2}
+    amount: 1
+  cameraPosition: {x: 0.5, y: 8, z: -1}
