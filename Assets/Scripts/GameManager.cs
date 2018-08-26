@@ -103,6 +103,9 @@ public class GameManager : MonoBehaviour {
 
     }
 
+
+    # if UNITY_EDITOR
+
     public void SaveLevel() {
         
         // Reset the tile list
@@ -135,6 +138,8 @@ public class GameManager : MonoBehaviour {
         AssetDatabase.Refresh();
         AssetDatabase.SaveAssets();
     }
+
+    #endif
 
     public void RunLevel() {
         animator.SetBool("ChangeLight", true);
