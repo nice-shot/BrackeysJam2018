@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     public GameObject tilePrefab;
     public Transform tilesParent;
     public UIManager uiManager;
+    public Animator animator;
 
     [SerializeField] private Placeable currentPlaceable;
 
@@ -119,5 +120,11 @@ public class GameManager : MonoBehaviour {
         EditorUtility.SetDirty(level);
         AssetDatabase.Refresh();
         AssetDatabase.SaveAssets();
+    }
+
+    public void RunLevel() {
+        animator.SetBool("ChangeLight", true);
+
+        // TODO: Check if the level passed on print message
     }
 }
