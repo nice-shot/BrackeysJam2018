@@ -125,6 +125,18 @@ public class GameManager : MonoBehaviour {
     public void RunLevel() {
         animator.SetBool("ChangeLight", true);
 
+        // We'll show the level's output when it's over. Though we'll check the level outcome here
+    }
+
+    public void OnLightAnimationEnd() {
         // TODO: Check if the level passed on print message
+        uiManager.ShowEndPanel(true);
+    }
+
+    public void NextLevel() {
+        uiManager.ClearEndPanel();
+        animator.SetBool("ChangeLight", false);
+        currentLevel++;
+        LoadLevel();
     }
 }

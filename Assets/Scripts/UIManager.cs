@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
     public Transform placeableBar;
     public PlaceableButton placeableButtonPrefab;
     public Button goButtton;
+    public GameObject endMessagePanel;
 
     private Dictionary<System.Type, PlaceableButton> placeableButtons = new Dictionary<System.Type, PlaceableButton>();
     private int totalCounter;
@@ -56,5 +57,14 @@ public class UIManager : MonoBehaviour {
         } else {
             goButtton.interactable = false;
         }
+    }
+
+    public void ShowEndPanel(bool outcome) {
+        // TODO: change messages for negative outcome
+        endMessagePanel.SetActive(true);
+    }
+
+    public void ClearEndPanel() {
+        endMessagePanel.SetActive(false);
     }
 }
