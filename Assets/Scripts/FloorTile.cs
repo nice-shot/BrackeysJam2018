@@ -6,7 +6,7 @@ public class FloorTile : MonoBehaviour {
 
     public GameObject overlayUI;
 
-    private GameObject placeable;
+    private Placeable placeable;
     private bool available = true;
     private float doubleClickTimer;
     private bool clicked = false;
@@ -49,7 +49,7 @@ public class FloorTile : MonoBehaviour {
         }
     }
 
-    private void PlaceElement(GameObject placeablePrefab) {
+    private void PlaceElement(Placeable placeablePrefab) {
         if (placeablePrefab == null) {
             // TODO: Indicate there was no element to place
             return;
@@ -61,7 +61,7 @@ public class FloorTile : MonoBehaviour {
 
     private void RemoveElement() {
         if (placeable != null) {
-            Destroy(placeable);
+            Destroy(placeable.gameObject);
         }
         placeable = null;
     }

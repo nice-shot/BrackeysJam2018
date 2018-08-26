@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlaceableButton : MonoBehaviour {
 
-    public GameObject placeablePrefab;
+    public Placeable placeablePrefab;
 
     public void OnPress() {
         GameManager.instance.SetPlaceable(placeablePrefab);

@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
     public GameObject tilePrefab;
     public Transform tilesParent;
 
-    [SerializeField] private GameObject currentPlaceable;
+    [SerializeField] private Placeable currentPlaceable;
 
     private List<GameObject> tiles = new List<GameObject>();
 
@@ -27,12 +27,12 @@ public class GameManager : MonoBehaviour {
     }
     #endregion
 
-    public void SetPlaceable(GameObject newPlaceable) {
+    public void SetPlaceable(Placeable newPlaceable) {
         // Return the old placeable to stack
         currentPlaceable = newPlaceable;
     }
 
-    public GameObject GetPlaceable() {
+    public Placeable GetPlaceable() {
         return currentPlaceable;
     }
 
