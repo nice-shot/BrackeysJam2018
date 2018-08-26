@@ -15,6 +15,7 @@ MonoBehaviour:
   - x: 0
     z: -0.5
   placeables:
-  - type: 1
+  - placeable: {fileID: 114821785921637666, guid: 26b26c354f1e0d94b96461a06327163e,
+      type: 2}
     amount: 1
   cameraPosition: {x: 0, y: 8, z: -1}

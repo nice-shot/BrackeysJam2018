@@ -5,17 +5,18 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager instance;
+
     public Level[] levels;
     public int currentLevel;
     public GameObject tilePrefab;
     public Transform tilesParent;
+    public UIManager uiManager;
 
     [SerializeField] private Placeable currentPlaceable;
 
     private List<GameObject> tiles = new List<GameObject>();
 
-    #region Instance
-    public static GameManager instance;
 
     private void Awake() {
         if (instance == null) {
@@ -25,7 +26,6 @@ public class GameManager : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
-    #endregion
 
     public void SetPlaceable(Placeable newPlaceable) {
         // Return the old placeable to stack
@@ -36,8 +36,11 @@ public class GameManager : MonoBehaviour {
         return currentPlaceable;
     }
 
-    [ContextMenu("Clear Level")]
     public void ClearLevel() {
+        // Reset selected placeable
+        currentPlaceable = null;
+
+        // Clear tiles
         foreach(GameObject tile in tiles) {
             if (!Application.isPlaying) {
                 // Used when changing levels in the editor
@@ -48,13 +51,17 @@ public class GameManager : MonoBehaviour {
 
         }
         tiles = new List<GameObject>();
+
+        // Clear UI
+        uiManager.ClearButtons();
     }
 
-    [ContextMenu("Load Level")]
     public void LoadLevel() {
         ClearLevel();
+
         Level level = levels[currentLevel];
 
+        // Place tiles
         foreach (Level.TilePlacement tilePlacement in level.tiles) {
             // Tiles are always on 0.5 to fit the grid
             Vector3 position = new Vector3(tilePlacement.x, 0.5f, tilePlacement.z);
@@ -62,10 +69,14 @@ public class GameManager : MonoBehaviour {
             tiles.Add(tile);
         }
 
+        // Set Camera
         Camera.main.transform.position = level.cameraPosition;
+
+        // Set UI
+        uiManager.SetPlaceableButtons(level);
+
     }
 
-    [ContextMenu("Save Level")]
     public void SaveLevel() {
         
         // Reset the tile list
