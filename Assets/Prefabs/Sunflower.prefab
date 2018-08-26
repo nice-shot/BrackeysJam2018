@@ -21,8 +21,9 @@ GameObject:
   - component: {fileID: 4631912025090628}
   - component: {fileID: 33569757078591776}
   - component: {fileID: 23512599823078024}
+  - component: {fileID: 114821785921637666}
   m_Layer: 0
-  m_Name: BaseFlower
+  m_Name: Sunflower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,3 +84,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1458498364435660}
   m_Mesh: {fileID: 4300000, guid: 3bb267ee0c90d482b9e13aa998e8be49, type: 3}
+--- !u!114 &114821785921637666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458498364435660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd1eed00eda2924c9a088d3cc0144f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sunReq: 0

@@ -14,4 +14,7 @@ MonoBehaviour:
   tiles:
   - x: 0
     z: -0.5
+  placeables:
+  - type: 1
+    amount: 1
   cameraPosition: {x: 0, y: 8, z: -1}

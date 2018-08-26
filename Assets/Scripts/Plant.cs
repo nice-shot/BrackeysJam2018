@@ -7,10 +7,11 @@ using System.Collections;
 /// </summary>
 public class Plant : Placeable {
     public enum SunNeeds {
-        Total,
-        Half,
+        Full,
         ThreeQuarters,
-        None
+        Half,
+        Quarter,
+        Zero
     }
 
     public SunNeeds sunReq;
