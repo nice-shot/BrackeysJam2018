@@ -54,16 +54,24 @@ public class GameManager : MonoBehaviour {
     public void LoadLevel() {
         ClearLevel();
         Level level = levels[currentLevel];
-        foreach(Level.TilePlacement tilePlacement in level.tiles) {
+
+        foreach (Level.TilePlacement tilePlacement in level.tiles) {
             // Tiles are always on 0.5 to fit the grid
             Vector3 position = new Vector3(tilePlacement.x, 0.5f, tilePlacement.z);
             GameObject tile = Instantiate(tilePrefab, position, Quaternion.identity, tilesParent);
             tiles.Add(tile);
         }
+
+        Camera.main.transform.position = level.cameraPosition;
     }
 
     [ContextMenu("Save Level")]
     public void SaveLevel() {
+        
+        // Reset the tile list
+        tiles = new List<GameObject>();
+
+        // Find tiles
         FloorTile[] currentTiles;
         if (tilesParent != null) {
             currentTiles = tilesParent.GetComponentsInChildren<FloorTile>();
@@ -71,7 +79,7 @@ public class GameManager : MonoBehaviour {
             currentTiles = GetComponents<FloorTile>();
         }
 
-        tiles = new List<GameObject>();
+        // Set tile positions in level scriptable object
         Level level = levels[currentLevel];
         level.tiles = new Level.TilePlacement[currentTiles.Length];
         for (int i = 0; i < currentTiles.Length; i++) {
@@ -82,6 +90,10 @@ public class GameManager : MonoBehaviour {
             level.tiles[i] = tilePlacement;
             tiles.Add(tile.gameObject);
         }
+
+        // Set camera
+        level.cameraPosition = Camera.main.transform.position;
+
         EditorUtility.SetDirty(level);
         AssetDatabase.Refresh();
         AssetDatabase.SaveAssets();

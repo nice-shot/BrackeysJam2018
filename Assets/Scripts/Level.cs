@@ -11,5 +11,6 @@ public class Level : ScriptableObject {
     }
 
     public TilePlacement[] tiles;
+    public Vector3 cameraPosition;
 
 }

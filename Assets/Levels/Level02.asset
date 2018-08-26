@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Name: Level02
   m_EditorClassIdentifier: 
   tiles:
-  - x: -1
-    z: 0.5
+  - x: 0
+    z: -0.5
+  cameraPosition: {x: 0, y: 8, z: -1}
