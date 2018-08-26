@@ -185,13 +185,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void OnLightAnimationEnd() {
-        if (levelPassed) {
-            Debug.Log("you win");
-        } else {
-            Debug.Log("you lose");
-        }
-        // TODO: Check if the level passed on print message
-        uiManager.ShowEndPanel(true);
+        uiManager.ShowEndPanel(levelPassed);
+    }
+
+    public void ReloadLevel() {
+        uiManager.ClearEndPanel();
+        animator.SetBool("ChangeLight", false);
+        LoadLevel();
     }
 
     public void NextLevel() {

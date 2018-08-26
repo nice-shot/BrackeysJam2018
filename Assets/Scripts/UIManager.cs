@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour {
     public Transform placeableBar;
     public PlaceableButton placeableButtonPrefab;
     public Button goButtton;
-    public GameObject endMessagePanel;
+    public EndMessagePanel endMessagePanel;
 
     private Dictionary<string, PlaceableButton> placeableButtons = new Dictionary<string, PlaceableButton>();
     private int totalCounter;
@@ -59,12 +59,21 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    public void ShowEndPanel(bool outcome) {
-        // TODO: change messages for negative outcome
-        endMessagePanel.SetActive(true);
+    public void ShowEndPanel(bool didWin) {
+        if (didWin) {
+            endMessagePanel.outcomeText.text = "Plants are properly Sunbathed!";
+            endMessagePanel.buttonText.text = "Continue";
+            endMessagePanel.SetButtonToContinue();
+        } else {
+            endMessagePanel.outcomeText.text = "Plants didn't recieve the right amount of sun...";
+            endMessagePanel.buttonText.text = "Try again";
+            endMessagePanel.SetButtonToReload();
+        }
+
+        endMessagePanel.gameObject.SetActive(true);
     }
 
     public void ClearEndPanel() {
-        endMessagePanel.SetActive(false);
+        endMessagePanel.gameObject.SetActive(false);
     }
 }
