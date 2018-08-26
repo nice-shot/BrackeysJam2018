@@ -38,10 +38,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public Placeable GetPlaceable() {
+        Placeable returnPlaceable = null;
         if (currentPlaceable != null) {
             uiManager.ChangePlaceableAmount(currentPlaceable, false);
+            returnPlaceable = currentPlaceable;
         }
-        return currentPlaceable;
+        currentPlaceable = null;
+        return returnPlaceable;
     }
 
     public void ReturnPlaceable(Placeable placeable) {
@@ -70,6 +73,8 @@ public class GameManager : MonoBehaviour {
 
     public void LoadLevel() {
         ClearLevel();
+
+        currentPlaceable = null;
 
         Level level = levels[currentLevel];
 
