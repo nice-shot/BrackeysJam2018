@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4833725309676996}
   - component: {fileID: 114924512727792378}
   - component: {fileID: 114866864400881780}
+  - component: {fileID: 95961093912088286}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -71,6 +72,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95961093912088286
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1389228841348942}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b4de1781e34cb347bf938645cbc574c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!108 &108106577727649526
 Light:
   m_ObjectHideFlags: 1
@@ -81,7 +100,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 0.6
   m_Range: 15
   m_SpotAngle: 70
   m_CookieSize: 10
@@ -123,6 +142,7 @@ MonoBehaviour:
   placeableButtonPrefab: {fileID: 114733481285333788, guid: 5c0d8c21cd4726d4f808245d1ed7059e,
     type: 2}
   goButtton: {fileID: 0}
+  endMessagePanel: {fileID: 0}
 --- !u!114 &114924512727792378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,8 +157,12 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: fe348052d2cc5e24e91e29566eb7b853, type: 2}
   - {fileID: 11400000, guid: ae82a4cc9f3497b4ca30faadd95ae28e, type: 2}
-  currentLevel: 0
-  tilePrefab: {fileID: 1610199131308098, guid: 37b8435d8827d5345bf63b6cd2e73b8f, type: 2}
+  - {fileID: 11400000, guid: 800a28462ebb8e3478e352a854f4eb56, type: 2}
+  - {fileID: 11400000, guid: a836b2f306d8b3b469b299919f5fa25e, type: 2}
+  currentLevel: 3
+  tilePrefab: {fileID: 114816173658074536, guid: 37b8435d8827d5345bf63b6cd2e73b8f,
+    type: 2}
   tilesParent: {fileID: 0}
   uiManager: {fileID: 114866864400881780}
+  animator: {fileID: 95961093912088286}
   currentPlaceable: {fileID: 0}
