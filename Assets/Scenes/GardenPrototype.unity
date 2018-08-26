@@ -515,6 +515,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114924512727792378, guid: 6aeff03b16bd0db46a20426faef071bd,
+        type: 2}
+      propertyPath: levels.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4833725309676996, guid: 6aeff03b16bd0db46a20426faef071bd, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -567,6 +572,17 @@ Prefab:
       propertyPath: tilesParent
       value: 
       objectReference: {fileID: 294398030}
+    - target: {fileID: 114924512727792378, guid: 6aeff03b16bd0db46a20426faef071bd,
+        type: 2}
+      propertyPath: levels.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 852833a1227133f458c7bdc9977e4d80,
+        type: 2}
+    - target: {fileID: 114924512727792378, guid: 6aeff03b16bd0db46a20426faef071bd,
+        type: 2}
+      propertyPath: currentLevel
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6aeff03b16bd0db46a20426faef071bd, type: 2}
   m_IsPrefabAsset: 0
@@ -641,7 +657,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2, y: 8, z: 0}
+  m_LocalPosition: {x: 1, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

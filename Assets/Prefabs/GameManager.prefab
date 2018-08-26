@@ -159,7 +159,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae82a4cc9f3497b4ca30faadd95ae28e, type: 2}
   - {fileID: 11400000, guid: 800a28462ebb8e3478e352a854f4eb56, type: 2}
   - {fileID: 11400000, guid: a836b2f306d8b3b469b299919f5fa25e, type: 2}
-  currentLevel: 3
+  - {fileID: 11400000, guid: 852833a1227133f458c7bdc9977e4d80, type: 2}
+  currentLevel: 0
   tilePrefab: {fileID: 114816173658074536, guid: 37b8435d8827d5345bf63b6cd2e73b8f,
     type: 2}
   tilesParent: {fileID: 0}
