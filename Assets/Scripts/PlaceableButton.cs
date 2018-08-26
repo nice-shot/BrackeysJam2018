@@ -18,10 +18,24 @@ public class PlaceableButton : MonoBehaviour {
     public void Setup() {
         amountText.text = amount.ToString();
         nameText.text = placeablePrefab.name;
+        // TODO: Add icon
     }
 
     public void OnPress() {
         GameManager.instance.SetPlaceable(placeablePrefab);
+    }
+
+    public void LowerAmount() {
+        SetAmount(amount - 1);
+    }
+
+    public void AddAmount() {
+        SetAmount(amount + 1);
+    }
+
+    private void SetAmount(int newAmount) {
+        amount = newAmount;
+        amountText.text = amount.ToString();
     }
 
 }

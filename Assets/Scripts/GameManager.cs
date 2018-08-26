@@ -27,13 +27,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    private void Start() {
+        LoadLevel();
+    }
+
     public void SetPlaceable(Placeable newPlaceable) {
         // Return the old placeable to stack
         currentPlaceable = newPlaceable;
     }
 
     public Placeable GetPlaceable() {
+        if (currentPlaceable != null) {
+            uiManager.ChangePlaceableAmount(currentPlaceable, false);
+        }
         return currentPlaceable;
+    }
+
+    public void ReturnPlaceable(Placeable placeable) {
+        uiManager.ChangePlaceableAmount(placeable, true);
     }
 
     public void ClearLevel() {

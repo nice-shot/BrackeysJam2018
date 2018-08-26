@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour {
     public Transform placeableBar;
     public PlaceableButton placeableButtonPrefab;
 
-    private Dictionary<Placeable, PlaceableButton> placeableButtons = new Dictionary<Placeable, PlaceableButton>();
+    private Dictionary<System.Type, PlaceableButton> placeableButtons = new Dictionary<System.Type, PlaceableButton>();
 
     public void ClearButtons() {
         foreach (PlaceableButton button in placeableButtons.Values) {
@@ -30,7 +30,15 @@ public class UIManager : MonoBehaviour {
             // Used instead of Awake/Start to make sure added objects are placed
             button.Setup();
 
-            placeableButtons[placeableData.placeable] = button;
+            placeableButtons[placeableData.placeable.GetType()] = button;
+        }
+    }
+
+    public void ChangePlaceableAmount(Placeable usedPlaceable, bool increase) {
+        if (increase) {
+            placeableButtons[usedPlaceable.GetType()].AddAmount();
+        } else {
+            placeableButtons[usedPlaceable.GetType()].LowerAmount();
         }
     }
 }

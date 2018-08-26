@@ -12,6 +12,12 @@ public class FloorTile : MonoBehaviour {
     private bool clicked = false;
     const float DOUBLE_CLICK_DELAY = 0.25f;
 
+    private GameManager manager;
+
+    private void Awake() {
+        manager = GameManager.instance;
+    }
+
     private void Update() {
         if (clicked) {
             if (Time.time - doubleClickTimer > DOUBLE_CLICK_DELAY) {
@@ -33,7 +39,7 @@ public class FloorTile : MonoBehaviour {
     private void OnMouseDown() {
         if (available) {
             // Place element above tile
-            PlaceElement(GameManager.instance.GetPlaceable());
+            PlaceElement(manager.GetPlaceable());
             return;
         }
 
@@ -61,6 +67,7 @@ public class FloorTile : MonoBehaviour {
 
     private void RemoveElement() {
         if (placeable != null) {
+            manager.ReturnPlaceable(placeable);
             Destroy(placeable.gameObject);
         }
         placeable = null;
