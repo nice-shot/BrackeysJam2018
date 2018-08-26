@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
     public Transform placeableBar;
     public PlaceableButton placeableButtonPrefab;
+    public Button goButtton;
 
     private Dictionary<System.Type, PlaceableButton> placeableButtons = new Dictionary<System.Type, PlaceableButton>();
+    private int totalCounter;
 
     public void ClearButtons() {
         foreach (PlaceableButton button in placeableButtons.Values) {
@@ -31,14 +34,27 @@ public class UIManager : MonoBehaviour {
             button.Setup();
 
             placeableButtons[placeableData.placeable.GetType()] = button;
+            totalCounter += placeableData.amount;
         }
+        CheckCounter();
     }
 
     public void ChangePlaceableAmount(Placeable usedPlaceable, bool increase) {
         if (increase) {
             placeableButtons[usedPlaceable.GetType()].AddAmount();
+            totalCounter++;
         } else {
             placeableButtons[usedPlaceable.GetType()].LowerAmount();
+            totalCounter--;
+        }
+        CheckCounter();
+    }
+
+    private void CheckCounter() {
+        if (totalCounter <= 0) {
+            goButtton.interactable = true;
+        } else {
+            goButtton.interactable = false;
         }
     }
 }
